@@ -1,23 +1,33 @@
 //Outputs random: "Rock", "Paper", or "Scissors" computer function
-function computerPlay()
-{ 
-return choices[Math.floor(Math.random()* 3)]
+function computerPlay(){ 
+  const choices = ["Rock", "Paper", "Scissors"];
+  return choices[Math.floor(Math.random()* 3)].toLowerCase();
 }
+console.log(computerPlay())
 
-const choices = ["rock", "paper", "scissors"];
 //prompt("rock paper or scissors"); User Function
 
-function userInput() {
-  let playerSelection = prompt('Rock, Paper, or Scissors?','');
-  return playerSelection.toLowerCase();
 
-}
+let btnChoice = document.querySelectorAll('button');
+let rockText = document.getElementById('rock').textContent;
+let paperText = document.getElementById('paper').textContent;
+let scissorsText = document.getElementById('scissors').textContent;
+ 
+
+btnChoice.forEach(button => button.addEventListener('click', () =>{
+  let playerSelection = button.textContent.toLowerCase(); 
+  console.log(playerSelection)
+}));
+
+
 //Play function
 
   let computerScore = 0
   let humanScore = 0
   //let outcome = playRound(playerSelection,computerSelection)
-  function playRound(){
+    function playRound(playerSelection,computerSelection){
+     computerSelection = computerPlay();
+     playerSelection 
       if( playerSelection == computerSelection ){
         return "It's a draw, try again!"
       }else if ( playerSelection == "scissors" && computerSelection == "paper"){
@@ -34,8 +44,11 @@ function userInput() {
         return "You lose! Paper beats Rock" 
       }
     }
-  
+ console.log(playRound(playerSelection,computerSelection))
+   
 
+
+/*
 function game() {
   for (let i = 0; i < 5; i++) {
       computerSelection = computerPlay();
@@ -77,9 +90,5 @@ console.log(game());
 console.log('Final Score!')
 console.log('Player: ' + humanScore);
 console.log('Computer: ' + computerScore);
-console.log(displayWinner());
-
- 
-
-
-
+console.log(displayWinner)
+*/
