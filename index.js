@@ -8,87 +8,65 @@ console.log(computerPlay())
 //prompt("rock paper or scissors"); User Function
 
 
-let btnChoice = document.querySelectorAll('button');
-let rockText = document.getElementById('rock').textContent;
-let paperText = document.getElementById('paper').textContent;
-let scissorsText = document.getElementById('scissors').textContent;
- 
+const rockBtn = document.getElementById('rock');
+const paperBtn = document.getElementById('paper');
+const scissorsBtn = document.getElementById('scissors')
 
-btnChoice.forEach(button => button.addEventListener('click', () =>{
-  let playerSelection = button.textContent.toLowerCase(); 
+//Assigns playerSelection to eventListener, and calls playRound function;
+function clickListener(event){
+  const playerSelection = event.target.id
+  const computerSelection = computerPlay();
+  playRound(playerSelection, computerSelection);
   console.log(playerSelection)
-}));
+  console.log (computerSelection)
+  console.log(playRound(playerSelection,computerSelection));
+  console.log(updateScore(playerSelection,computerSelection));
+  
+}
+rockBtn.addEventListener('click', clickListener);
+paperBtn.addEventListener('click', clickListener);
+scissorsBtn.addEventListener('click', clickListener);
+
 
 
 //Play function
-
-  let computerScore = 0
-  let humanScore = 0
+let robotScore = 0
+let humanScore = 0
+  
   //let outcome = playRound(playerSelection,computerSelection)
     function playRound(playerSelection,computerSelection){
-     computerSelection = computerPlay();
-     playerSelection 
-      if( playerSelection == computerSelection ){
-        return "It's a draw, try again!"
-      }else if ( playerSelection == "scissors" && computerSelection == "paper"){
-        return "You Win! Scissors Beats Paper" 
-      }else if (playerSelection == "rock" && computerSelection == "scissors"){
-        return "You Win! Rock Beats Scissors" 
-      }else if (playerSelection == "paper" && computerSelection == "rock") {
-        return "You Win! Paper Beats Rock" 
-      }else if (playerSelection == "scissors" && computerSelection == "rock"){
-        return "You lose! Rock beats Scissors"
-      }else if (playerSelection == "paper" && computerSelection == "scissors"){
-        return "You lose! Scissors beats Paper"
-      }else if (playerSelection == "rock" && computerSelection == "paper"){
-        return "You lose! Paper beats Rock" 
+      if( playerSelection === computerSelection ){
+        scoreboard.textContent = "It's a draw, try again!"
+      }else if ( playerSelection === "scissors" && computerSelection === "paper"){
+        scoreboard.textContent = "You Win! Scissors Beats Paper" 
+      }else if (playerSelection === "rock" && computerSelection === "scissors"){
+        scoreboard.textContent = "You Win! Rock Beats Scissors" 
+      }else if (playerSelection === "paper" && computerSelection === "rock") {
+        scoreboard.textContent = "You Win! Paper Beats Rock" 
+      }else if (playerSelection === "scissors" && computerSelection === "rock"){
+        scoreboard.textContent = "You lose! Rock beats Scissors"
+      }else if (playerSelection === "paper" && computerSelection === "scissors"){
+        scoreboard.textContent = "You lose! Scissors beats Paper"
+      }else if (playerSelection === "rock" && computerSelection === "paper"){
+        scoreboard.textContent = "You lose! Paper beats Rock" 
       }
     }
- console.log(playRound(playerSelection,computerSelection))
-   
 
-
-/*
-function game() {
-  for (let i = 0; i < 5; i++) {
-      computerSelection = computerPlay();
-      playerSelection = userInput();
-      let result = playRound(playerSelection, computerSelection);
-      if (result == "You Win! Scissors Beats Paper" || result == "You Win! Paper Beats Rock" || result == "You Win! Rock Beats Scissors"  ){
-      humanScore++;
-      console.log('Player: ' + humanScore)
-      console.log('Computer: ' + computerScore)
-      console.log("Computer chose" + computerSelection)
-      console.log("You win this round!")
-     } else if ( result == "You lose! Rock beats Scissors"|| result == "You lose! Scissors beats Paper" || result == "You lose! Paper beats Rock" ){
-       computerScore++
-       console.log('Player: ' + humanScore)
-       console.log('Computer: ' + computerScore)
-       console.log("Computer chose" + computerSelection)
-       console.log("Computer wins this round!")
-     } else if (result == "It's a draw, try again!"){
-      console.log("This round is a draw!")
-     }else{
-       console.log("only choose rock paper or scissors")
-       i--;
-     }
-  
-} 
+//Updates scores 
+function updateScore(playerSelection,computerSelection) {
+  if (playerSelection === "rock" && computerSelection === "scissors" || 
+      playerSelection === "scissors" && computerSelection === "paper" ||
+      playerSelection === "paper" && computerSelection === "rock"){
+        playerscore.textContent = ++humanScore;
+  }else if (playerSelection === computerSelection){
+  }else computerscore.textContent= ++robotScore;
 }
 
-//Function to display at the end of the game
-function displayWinner() {
-  if (humanScore > computerScore) {
-      return 'You beat the computer!';
-  }   else if (computerScore > humanScore) {
-          return 'You lost to the computer!';
-  }   else if (huamnScore === computerScore) {
-          return 'It\'s a tie!'
+function displayWinner(){
+  if (humanScore === 5){
+    print("Player Wins! Computers Suck!")
+  }
+  else if (robotScore === 5){
+    print("Computer Wins! You're Terrible!")
   }
 }
-console.log(game());
-console.log('Final Score!')
-console.log('Player: ' + humanScore);
-console.log('Computer: ' + computerScore);
-console.log(displayWinner)
-*/
