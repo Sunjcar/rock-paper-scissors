@@ -57,7 +57,7 @@ function updateScore(playerSelection,computerSelection) {
 
 function displayWinner(){
   if (robotScore === 5){
-    scoreboard.textContent = "Computer Wins, You SUCK!";
+    scoreboard.textContent = "Computer Wins, You lose!";
     rockBtn.setAttribute("disabled", 1);
     paperBtn.setAttribute("disabled", 1);
     scissorsBtn.setAttribute("disabled", 1);
