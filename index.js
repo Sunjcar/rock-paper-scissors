@@ -3,15 +3,11 @@ function computerPlay(){
   const choices = ["Rock", "Paper", "Scissors"];
   return choices[Math.floor(Math.random()* 3)].toLowerCase();
 }
-console.log(computerPlay())
-
-//prompt("rock paper or scissors"); User Function
-
 
 const rockBtn = document.getElementById('rock');
 const paperBtn = document.getElementById('paper');
 const scissorsBtn = document.getElementById('scissors')
-
+const resetBtn = document.getElementById('reset')
 //Assigns playerSelection to eventListener, and calls playRound function;
 function clickListener(event){
   const playerSelection = event.target.id
@@ -19,21 +15,16 @@ function clickListener(event){
   playRound(playerSelection, computerSelection);
   console.log(playerSelection)
   console.log (computerSelection)
-  console.log(playRound(playerSelection,computerSelection));
   console.log(updateScore(playerSelection,computerSelection));
+  console.log(displayWinner())
   
 }
 rockBtn.addEventListener('click', clickListener);
 paperBtn.addEventListener('click', clickListener);
 scissorsBtn.addEventListener('click', clickListener);
-
-
+resetBtn.addEventListener('click', newGame);
 
 //Play function
-let robotScore = 0
-let humanScore = 0
-  
-  //let outcome = playRound(playerSelection,computerSelection)
     function playRound(playerSelection,computerSelection){
       if( playerSelection === computerSelection ){
         scoreboard.textContent = "It's a draw, try again!"
@@ -52,6 +43,8 @@ let humanScore = 0
       }
     }
 
+  let robotScore = 0
+  let humanScore = 0
 //Updates scores 
 function updateScore(playerSelection,computerSelection) {
   if (playerSelection === "rock" && computerSelection === "scissors" || 
@@ -63,10 +56,31 @@ function updateScore(playerSelection,computerSelection) {
 }
 
 function displayWinner(){
-  if (humanScore === 5){
-    print("Player Wins! Computers Suck!")
+  if (robotScore === 5){
+    scoreboard.textContent = "Computer Wins, You SUCK!";
+    rockBtn.setAttribute("disabled", 1);
+    paperBtn.setAttribute("disabled", 1);
+    scissorsBtn.setAttribute("disabled", 1);
   }
-  else if (robotScore === 5){
-    print("Computer Wins! You're Terrible!")
-  }
-}
+  else if (humanScore === 5){
+    scoreboard.textContent = "You Win! THE CHAMPION!";
+    rockBtn.setAttribute("disabled", 1);
+    paperBtn.setAttribute("disabled", 1);
+    scissorsBtn.setAttribute("disabled", 1);
+  };
+};
+
+function newGame() {
+  robotScore = 0;
+  humanScore = 0;
+  playerscore.textContent = humanScore;
+  computerscore.textContent = robotScore;
+  scoreboard.textContent = '' ;
+  rockBtn.removeAttribute('disabled')
+  paperBtn.removeAttribute('disabled')
+  scissorsBtn.removeAttribute('disabled')
+  };
+  
+ 
+
+
